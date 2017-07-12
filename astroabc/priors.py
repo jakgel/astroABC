@@ -66,7 +66,7 @@ class Prior_class(object):
 			mean1=self.hyperparams[0]
 			mean2=self.hyperparams[1]
 			COV=self.hyperparams[2]
-			return scipy.stats.multivariate_normal.pdf(x, mean=[mean1,mean2], cov=COV))
+			return scipy.stats.multivariate_normal.pdf(x, mean=[mean1,mean2], cov=COV)
 		elif self.priorname == "nonstandard":
 			return self.spline2_pdf(value)
 
