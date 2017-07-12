@@ -62,6 +62,11 @@ class Prior_class(object):
 		elif self.priorname =="uniform":
 			width = self.hyperparams[1] - self.hyperparams[0]
                         return scipy.stats.uniform.pdf(value, loc = self.hyperparams[0],scale=width)
+		elif self.priorname == "multigauss":
+			mean1=self.hyperparams[0]
+			mean2=self.hyperparams[1]
+			COV=self.hyperparams[2]
+			return scipy.stats.multivariate_normal.pdf(x, mean=[mean1,mean2], cov=COV))
 		elif self.priorname == "nonstandard":
 			return self.spline2_pdf(value)
 
@@ -79,6 +84,11 @@ class Prior_class(object):
                         return float(np.random.normal(self.hyperparams[0],self.hyperparams[1],size=1))
                 elif self.priorname =="uniform":
                         return float(np.random.uniform(low=self.hyperparams[0],high=self.hyperparams[1],size=1))
+                elif self.priorname == "multigauss":
+                        mean1=self.hyperparams[0]
+                        mean2=self.hyperparams[1]
+                        COV=self.hyperparams[2]
+                        return scipy.stats.multivariate_normal.rvs(mean=[mean1,mean2], cov=COV)
 		elif self.priorname == "nonstandard":
 			uni_rvs = np.random.uniform()
 			return float(self.spline2_cdf(uni_rvs))
